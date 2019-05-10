@@ -1,0 +1,5 @@
+App\Entity\Rule:
+    rule_{1..200}:
+        titre: <word()>
+        description: <paragraph()>
+        movie: '@movie_*'
