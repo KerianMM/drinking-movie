@@ -16,7 +16,9 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateTimeType::class)
+            ->add('date', DateTimeType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('participants', EntityType::class, [
                 'class' => Participant::class,
                 'multiple' => true,
@@ -26,8 +28,7 @@ class SessionType extends AbstractType
                 'class' => Movie::class,
                 'multiple' => true,
                 'expanded' => true
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
