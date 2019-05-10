@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Participer;
 use App\Entity\Session;
+use App\Form\ParticiperType;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,7 +53,7 @@ class SessionController extends AbstractController
     /**
      * @Route("/{id}", name="session_show", methods={"GET"})
      */
-    public function show(Session $session): Response
+    public function show(Request $request, Session $session): Response
     {
         return $this->render('session/show.html.twig', [
             'session' => $session,
