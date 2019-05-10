@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParticiperRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MatchRepository")
  */
-class Participer
+class Match
 {
     /**
      * @ORM\Id()
@@ -17,20 +17,43 @@ class Participer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Session", inversedBy="sessions")
+     * @ORM\Column(type="integer")
+     */
+    private $count;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Session")
      * @ORM\JoinColumn(nullable=false)
      */
     private $session;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="participers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant")
      * @ORM\JoinColumn(nullable=false)
      */
     private $participant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rule")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rule;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    public function setCount(int $count): self
+    {
+        $this->count = $count;
+
+        return $this;
     }
 
     public function getSession(): ?Session
@@ -53,6 +76,18 @@ class Participer
     public function setParticipant(?Participant $participant): self
     {
         $this->participant = $participant;
+
+        return $this;
+    }
+
+    public function getRule(): ?Rule
+    {
+        return $this->rule;
+    }
+
+    public function setRule(?Rule $rule): self
+    {
+        $this->rule = $rule;
 
         return $this;
     }

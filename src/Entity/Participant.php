@@ -33,11 +33,6 @@ class Participant
      */
     private $email;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participer", mappedBy="participant")
-     */
-    private $participers;
-
     public function __construct()
     {
         $this->participers = new ArrayCollection();
@@ -80,37 +75,6 @@ class Participant
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Participer[]
-     */
-    public function getParticipers(): Collection
-    {
-        return $this->participers;
-    }
-
-    public function addParticiper(Participer $participer): self
-    {
-        if (!$this->participers->contains($participer)) {
-            $this->participers[] = $participer;
-            $participer->setParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticiper(Participer $participer): self
-    {
-        if ($this->participers->contains($participer)) {
-            $this->participers->removeElement($participer);
-            // set the owning side to null (unless already changed)
-            if ($participer->getParticipant() === $this) {
-                $participer->setParticipant(null);
-            }
-        }
 
         return $this;
     }
