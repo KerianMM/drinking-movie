@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Movie;
+use App\Entity\Participant;
 use App\Entity\Session;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +17,16 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('date', DateTimeType::class)
+            ->add('participants', EntityType::class, [
+                'class' => Participant::class,
+                'multiple' => true,
+                'expanded' => true,
+            ])
+            ->add('movies', EntityType::class, [
+                'class' => Movie::class,
+                'multiple' => true,
+                'expanded' => true
+            ])
         ;
     }
 

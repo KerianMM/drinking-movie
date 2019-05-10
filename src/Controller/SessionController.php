@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Participer;
 use App\Entity\Session;
-use App\Form\ParticiperType;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
