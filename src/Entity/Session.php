@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
@@ -26,6 +27,7 @@ class Session
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime(format="d/m/Y H:i")
      */
     private $date;
 
