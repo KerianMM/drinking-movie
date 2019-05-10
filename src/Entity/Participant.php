@@ -33,9 +33,14 @@ class Participant
      */
     private $email;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Session", mappedBy="participants")
+     */
+    private $sessions;
+
     public function __construct()
     {
-        $this->participers = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,5 +87,33 @@ class Participant
     public function __toString()
     {
         return (string) $this->getFirstname() .' '. $this->getLastname();
+    }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+            $session->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->contains($session)) {
+            $this->sessions->removeElement($session);
+            $session->removeParticipant($this);
+        }
+
+        return $this;
     }
 }

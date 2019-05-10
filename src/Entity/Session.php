@@ -24,16 +24,27 @@ class Session
      */
     private $createdAt;
 
-    public function __construct()
-    {
-        $this->createdAt = new DateTime();
-        $this->sessions = new ArrayCollection();
-    }
-
     /**
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Participant", inversedBy="sessions")
+     */
+    private $participants;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Movie", inversedBy="sessions")
+     */
+    private $movies;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+        $this->participants = new ArrayCollection();
+        $this->movies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,5 +79,57 @@ class Session
     public function __toString()
     {
         return (string) $this->getDate()->format('d/m/YYYY');
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Movie[]
+     */
+    public function getMovies(): Collection
+    {
+        return $this->movies;
+    }
+
+    public function addMovie(Movie $movie): self
+    {
+        if (!$this->movies->contains($movie)) {
+            $this->movies[] = $movie;
+        }
+
+        return $this;
+    }
+
+    public function removeMovie(Movie $movie): self
+    {
+        if ($this->movies->contains($movie)) {
+            $this->movies->removeElement($movie);
+        }
+
+        return $this;
     }
 }
