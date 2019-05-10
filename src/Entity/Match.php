@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MatchRepository")
+ * @ORM\Table(name="`match`")
  */
 class Match
 {
