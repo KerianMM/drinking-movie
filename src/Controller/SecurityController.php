@@ -12,10 +12,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\VarDumper\VarDumper;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * @Route("/", name="app_home")
+     */
+    public function home(): Response
+    {
+        return $this->redirect($this->generateUrl('session_index'));
+    }
+
     /**
      * @Route("/login", name="app_login")
      */

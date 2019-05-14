@@ -19,8 +19,8 @@
                 <td>{{ movie.id }}</td>
                 <td>{{ movie.name }}</td>
                 <td>
-                    <a href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
-                    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+                    <a href="{{ path('admin_movie_show', {'id': movie.id}) }}">show</a>
+                    <a href="{{ path('admin_movie_edit', {'id': movie.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('movie_new') }}">Create new</a>
+    <a href="{{ path('admin_movie_new') }}">Create new</a>
 {% endblock %}

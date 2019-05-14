@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/rule")
+ * @Route("/admin/rule", name="admin_rule_")
  */
 class RuleController extends AbstractController
 {
     /**
-     * @Route("/", name="rule_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(RuleRepository $ruleRepository): Response
     {
@@ -26,7 +26,7 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="rule_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rule_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Rule $rule): Response
     {
@@ -59,7 +59,7 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="rule_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Rule $rule): Response
     {
@@ -81,7 +81,7 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rule_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Rule $rule): Response
     {
