@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Participant
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -34,7 +37,7 @@ class Participant
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -45,6 +48,19 @@ class Participant
      * @ORM\ManyToMany(targetEntity="App\Entity\Session", mappedBy="participants")
      */
     private $sessions;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = ['ROLE_USER'];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    private $plainTextPassword;
 
     public function __construct()
     {
@@ -92,9 +108,84 @@ class Participant
         return $this;
     }
 
-    public function __toString()
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return (string) $this->getFirstname() .' '. $this->getLastname();
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainTextPassword(): ?string
+    {
+        return $this->plainTextPassword;
+    }
+
+    /**
+     * @param string|null $plainTextPassword
+     * @return Participant
+     */
+    public function setPlainTextPassword(?string $plainTextPassword): self
+    {
+        $this->plainTextPassword = $plainTextPassword;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     /**
@@ -123,5 +214,10 @@ class Participant
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getFirstname() .' '. $this->getLastname();
     }
 }

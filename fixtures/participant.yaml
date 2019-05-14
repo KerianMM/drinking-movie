@@ -3,3 +3,4 @@ App\Entity\Participant:
         firstname: <firstname()>
         lastname: <lastname()>
         email: <email()>
+        plainTextPassword: <word()>
