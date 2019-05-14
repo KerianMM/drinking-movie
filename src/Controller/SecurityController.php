@@ -39,7 +39,6 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            VarDumper::dump($form->get('plainPassword')->get('first')->getData());die;
             $user->setPlainTextPassword($form->get('plainPassword')->get('first')->getData());
 
             $entityManager = $this->getDoctrine()->getManager();
