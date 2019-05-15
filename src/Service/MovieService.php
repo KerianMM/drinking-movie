@@ -3,9 +3,8 @@
 namespace App\Service;
 
 
-use App\Entity\Participant;
+use App\Entity\Movie;
 use App\Repository\MovieRepository;
-use App\Repository\SessionRepository;
 
 class MovieService
 {
@@ -14,5 +13,10 @@ class MovieService
     public function __construct(MovieRepository $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function get(int $id): ?Movie
+    {
+        return $this->repository->find($id);
     }
 }

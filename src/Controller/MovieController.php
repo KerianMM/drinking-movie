@@ -3,33 +3,33 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
-use App\Repository\MovieRepository;
+use App\Entity\Session;
+use App\Service\MovieService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/movie")
- */
 class MovieController extends AbstractController
 {
-    /**
-     * @Route("/", name="movie_index", methods={"GET"})
-     */
-    public function index(MovieRepository $movieRepository): Response
+    private $service;
+
+    public function __construct(MovieService $service)
     {
-        return $this->render('movie/index.html.twig', [
-            'movies' => $movieRepository->findAll(),
-        ]);
+        $this->service = $service;
     }
 
     /**
-     * @Route("/{id}", name="movie_show", methods={"GET"})
+     * @Route("/session/{id}/movie/{idMovie}", name="movie_details", methods={"GET"})
      */
-    public function show(Movie $movie): Response
+    public function show(Session $session, int $idMovie): Response
     {
-        return $this->render('movie/show.html.twig', [
+        $movie = $this->service->get($idMovie);
+        dump($movie);
+        dump($session);
+        die;
+        return $this->render('movie/details.html.twig', [
             'movie' => $movie,
+            'session' => $session
         ]);
     }
 }

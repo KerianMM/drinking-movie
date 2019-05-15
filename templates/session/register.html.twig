@@ -25,7 +25,7 @@
                             <button class="btn btn-success" data-id="{{ session.id }}" data-action="session_register">
                                 {{ 'session.participant.register'|trans }}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('session_show', {'id': session.id}) }}">show</a>
+                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">show</a>
                         </td>
                     </tr>
                 {% else %}
@@ -55,7 +55,7 @@
                             <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_register">
                                 {{ 'session.participant.unregister'|trans }}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('session_show', {'id': session.id}) }}">show</a>
+                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">show</a>
                         </td>
                     </tr>
                 {% else %}

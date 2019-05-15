@@ -33,7 +33,7 @@ class Rule
     private $titre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Movie")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Movie", inversedBy="rules")
      * @ORM\JoinColumn(nullable=false)
      */
     private $movie;

@@ -31,9 +31,15 @@ class Movie
      */
     private $sessions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rule", mappedBy="movie")
+     */
+    private $rules;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+        $this->rules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -81,6 +87,37 @@ class Movie
         if ($this->sessions->contains($session)) {
             $this->sessions->removeElement($session);
             $session->removeMovie($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rule[]
+     */
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    public function addRule(Rule $rule): self
+    {
+        if (!$this->rules->contains($rule)) {
+            $this->rules[] = $rule;
+            $rule->setMovie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRule(Rule $rule): self
+    {
+        if ($this->rules->contains($rule)) {
+            $this->rules->removeElement($rule);
+            // set the owning side to null (unless already changed)
+            if ($rule->getMovie() === $this) {
+                $rule->setMovie(null);
+            }
         }
 
         return $this;

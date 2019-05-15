@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movie{% endblock %}
+
+{% block body %}
+    <h1>{{ 'session.title'|trans }} </h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rule in rules %}
+            <tr>
+                <td>{{ rule.titre }}</td>
+                <td>{{ rule.description }}</td>
+                <td>
+                    <button class="btn btn-success"
+                            data-id-rule="{{ rule.id }}"
+                            data-id-session="{{ session.id }}"
+                            data-action="match_add">+</button>
+                    <button class="btn btn-danger"
+                            data-id-rule="{{ rule.id }}"
+                            data-id-session="{{ session.id }}"
+                            data-action="match_remove">-</button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">{{ 'datas.unknown.list'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

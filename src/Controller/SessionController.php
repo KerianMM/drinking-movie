@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Service\SessionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,16 @@ class SessionController extends AbstractController
         return $this->render('session/register.html.twig', [
             'sessionsRegistered'    => $this->service->getByParticipantRegistered($user),
             'sessionsNotRegistered' => $this->service->getByParticipantNotRegistered($user),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="details", methods={"GET"})
+     */
+    public function show(Session $session): Response
+    {
+        return $this->render('session/details.html.twig', [
+            'session' => $session,
         ]);
     }
 }
