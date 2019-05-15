@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,15 @@ class MovieRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Movie::class);
+    }
+
+    public function findWithPagination(int $per_page, int $page): array
+    {
+        return $this->createQueryBuilder('movie')
+            ->setMaxResults($per_page)
+            ->setFirstResult($page * $per_page)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

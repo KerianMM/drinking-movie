@@ -26,6 +26,16 @@ class MovieController extends AbstractController
     }
 
     /**
+     * @Route("/page/{page}", name="index_paged", methods={"GET"})
+     */
+    public function paged(MovieRepository $movieRepository, int $page): Response
+    {
+        return $this->render('movie/index.html.twig', [
+            'movies' => $movieRepository->findWithPagination($this->getParameter('per_page'), $page-1),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
