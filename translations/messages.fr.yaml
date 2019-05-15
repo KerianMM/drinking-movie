@@ -15,12 +15,15 @@ movie:
     fields:
         id: "Id"
         name: "Titre"
-match:
+rule:
+    fields:
+        id: "Id"
+        title: "Titre"
+        description: "Description"
 datas:
     unknown:
         list: "Aucun résultat"
         date: "Inconnue"
-
 action:
     edit: "Editer"
     show:

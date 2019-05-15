@@ -3,18 +3,18 @@
 {% block title %}Movie{% endblock %}
 
 {% block body %}
-    <h1>{{ 'session.title'|trans }} </h1>
+    <h1>{{ 'session.title'|trans }} {{ session.date.format("d/m/Y H:i") }} | {{ 'movie.title'|trans }} {{ movie.name }}</h1>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Titre</th>
-            <th>Description</th>
+            <th>{{ 'rule.fields.title'|trans }}</th>
+            <th>{{ 'rule.fields.description'|trans }}</th>
             <th>actions</th>
         </tr>
         </thead>
         <tbody>
-        {% for rule in rules %}
+        {% for rule in movie.rules %}
             <tr>
                 <td>{{ rule.titre }}</td>
                 <td>{{ rule.description }}</td>
