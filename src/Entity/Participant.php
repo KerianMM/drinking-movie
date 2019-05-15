@@ -2,20 +2,28 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Participant implements UserInterface
 {
     /**
+     * @Groups({"read"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -23,6 +31,8 @@ class Participant implements UserInterface
     private $id;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
@@ -30,6 +40,8 @@ class Participant implements UserInterface
     private $firstname;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
@@ -37,6 +49,8 @@ class Participant implements UserInterface
     private $lastname;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\NotBlank()
@@ -45,6 +59,8 @@ class Participant implements UserInterface
     private $email;
 
     /**
+     * @Groups({"read", "write"})
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Session", mappedBy="participants")
      */
     private $sessions;
