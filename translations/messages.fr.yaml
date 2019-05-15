@@ -1,15 +1,21 @@
 session:
+    title: "Session"
     fields:
         id: "Id"
         date: "Date"
         participants: "Liste des participants"
-        movies: "Liste des films"
+        movies: "Films de la session"
     participant:
         register: "S'inscrire"
         unregister: "Se désinscrire"
         registered: "Inscrit"
         notregistered: "Pas encore inscrit"
-
+movie:
+    title: "Film"
+    fields:
+        id: "Id"
+        name: "Titre"
+match:
 datas:
     unknown:
         list: "Aucun résultat"
