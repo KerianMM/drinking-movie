@@ -8,11 +8,11 @@ use App\Repository\SessionRepository;
 
 class SessionService
 {
-    private $sessionRepository;
+    private $repository;
 
-    public function __construct(SessionRepository $sessionRepository)
+    public function __construct(SessionRepository $repository)
     {
-        $this->sessionRepository = $sessionRepository;
+        $this->repository = $repository;
     }
 
     /**
@@ -21,7 +21,7 @@ class SessionService
      */
     public function getByParticipantRegistered(Participant $participant): array
     {
-        return $this->sessionRepository->findByParticipantRegistered($participant->getId());
+        return $this->repository->findByParticipantRegistered($participant->getId());
     }
 
     /**
@@ -30,6 +30,6 @@ class SessionService
      */
     public function getByParticipantNotRegistered(Participant $participant): array
     {
-        return $this->sessionRepository->findByParticipantNotRegistered($participant->getId());
+        return $this->repository->findByParticipantNotRegistered($participant->getId());
     }
 }
