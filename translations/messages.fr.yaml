@@ -20,6 +20,7 @@ rule:
         id: "Id"
         title: "Titre"
         description: "Description"
+        count: "Nombre de verres"
 datas:
     unknown:
         list: "Aucun résultat"

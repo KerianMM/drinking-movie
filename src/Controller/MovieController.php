@@ -23,9 +23,8 @@ class MovieController extends AbstractController
      */
     public function show(Session $session, int $idMovie): Response
     {
-        $movie = $this->service->get($idMovie);
         return $this->render('movie/details.html.twig', [
-            'movie' => $movie,
+            'movie' => $this->service->get($idMovie),
             'session' => $session
         ]);
     }

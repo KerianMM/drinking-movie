@@ -11,6 +11,7 @@
             <th>{{ 'rule.fields.title'|trans }}</th>
             <th>{{ 'rule.fields.description'|trans }}</th>
             <th>actions</th>
+            <th>{{ 'rule.fields.count'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                             data-id-session="{{ session.id }}"
                             data-action="match_remove">-</button>
                 </td>
+                <td>0</td>
             </tr>
         {% else %}
             <tr>
