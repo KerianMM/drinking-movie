@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Session index{% endblock %}
+{% block title %}{{ 'session.list.title'|trans }}{% endblock %}
+
+{% block header %}
+    {% include '_commun/headers/user.html.twig' %}
+{% endblock %}
 
 {% block body %}
     <h1>Session index</h1>

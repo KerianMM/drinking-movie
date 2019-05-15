@@ -23,8 +23,8 @@
                 <td>{{ participant.lastname }}</td>
                 <td>{{ participant.email }}</td>
                 <td>
-                    <a href="{{ path('participant_show', {'id': participant.id}) }}">show</a>
-                    <a href="{{ path('participant_edit', {'id': participant.id}) }}">edit</a>
+                    <a href="{{ path('admin_participant_show', {'id': participant.id}) }}">show</a>
+                    <a href="{{ path('admin_participant_edit', {'id': participant.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('participant_new') }}">Create new</a>
+    <a href="{{ path('admin_participant_new') }}">Create new</a>
 {% endblock %}

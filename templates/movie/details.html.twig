@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Movie{% endblock %}
+{% block title %}{{ 'movie.title'|trans }}{% endblock %}
+
+{% block header %}
+    {% include '_commun/headers/user.html.twig' %}
+{% endblock %}
 
 {% block body %}
     <h1>{{ 'session.title'|trans }} {{ session.date.format("d/m/Y H:i") }} | {{ 'movie.title'|trans }} {{ movie.name }}</h1>
@@ -38,5 +42,4 @@
         {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}

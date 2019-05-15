@@ -1,4 +1,5 @@
 session:
+    list.title: "Sessions"
     title: "Session"
     fields:
         id: "Id"
@@ -11,16 +12,22 @@ session:
         registered: "Inscrit"
         notregistered: "Pas encore inscrit"
 movie:
+    list.title: "Films"
     title: "Film"
     fields:
         id: "Id"
         name: "Titre"
 rule:
+    list.title: "Rêgles"
+    title: "Rêgle"
     fields:
         id: "Id"
         title: "Titre"
         description: "Description"
         count: "Nombre de verres"
+participant:
+    list.title: "Utilisateurs"
+    title: "Utilisateur"
 datas:
     unknown:
         list: "Aucun résultat"

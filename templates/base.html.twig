@@ -10,6 +10,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <header>
+            {% block header %}
+                {% include '_commun/headers/admin.html.twig' %}
+            {% endblock %}
+        </header>
         <main class="container">
             {% block body %}{% endblock %}
         </main>
