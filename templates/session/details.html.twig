@@ -25,7 +25,10 @@
                 <td>{{ movie.id }}</td>
                 <td>{{ movie.name }}</td>
                 <td>
-                    <a href="{{ path('movie_details', {idMovie: movie.id, id: session.id}) }}" class="btn btn-primary">{{ 'action.show.details'|trans }}</a>
+                    <a href="{{ path('movie_details', {idMovie: movie.id, id: session.id}) }}"
+                       class="btn btn-primary" title="{{ 'action.show.details'|trans }}">
+                        {% include '_commun/icones/search.html.twig' %}
+                    </a>
                 </td>
             </tr>
         {% else %}

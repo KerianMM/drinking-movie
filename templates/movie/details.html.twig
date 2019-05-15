@@ -23,15 +23,19 @@
             <tr>
                 <td>{{ rule.titre }}</td>
                 <td>{{ rule.description }}</td>
-                <td>
+                <td class="w-25">
                     <button class="btn btn-success"
                             data-id-rule="{{ rule.id }}"
                             data-id-session="{{ session.id }}"
-                            data-action="match_add">+</button>
+                            data-action="match_add">
+                        {% include '_commun/icones/add.html.twig' %}
+                    </button>
                     <button class="btn btn-danger"
                             data-id-rule="{{ rule.id }}"
                             data-id-session="{{ session.id }}"
-                            data-action="match_remove">-</button>
+                            data-action="match_remove">
+                        {% include '_commun/icones/remove.html.twig' %}
+                    </button>
                 </td>
                 <td>0</td>
             </tr>

@@ -26,10 +26,13 @@
                         <td>{{ session.id }}</td>
                         <td>{{ session.date ? session : 'datas.unknown.date'|trans }}</td>
                         <td>
-                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_register">
-                                {{ 'session.participant.unregister'|trans }}
+                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_register"
+                                    title="{{ 'session.participant.unregister'|trans }}">
+                                {% include '_commun/icones/remove.html.twig' %}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">show</a>
+                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">
+                                {% include '_commun/icones/search.html.twig' %}
+                            </a>
                         </td>
                     </tr>
                 {% else %}
@@ -56,10 +59,13 @@
                         <td>{{ session.id }}</td>
                         <td>{{ session.date ? session : 'datas.unknown.date'|trans }}</td>
                         <td>
-                            <button class="btn btn-success" data-id="{{ session.id }}" data-action="session_register">
-                                {{ 'session.participant.register'|trans }}
+                            <button class="btn btn-success" data-id="{{ session.id }}" data-action="session_register"
+                                    title="{{ 'session.participant.register'|trans }}">
+                                {% include '_commun/icones/add.html.twig' %}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">show</a>
+                            <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">
+                                {% include '_commun/icones/search.html.twig' %}
+                            </a>
                         </td>
                     </tr>
                 {% else %}
