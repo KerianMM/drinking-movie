@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Session;
 use App\Form\SessionType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/session", name="session_")
+ * @Route("/admin/session", name="admin_session_")
  */
 class SessionController extends AbstractController
 {
@@ -20,11 +20,8 @@ class SessionController extends AbstractController
      */
     public function index(SessionRepository $sessionRepository): Response
     {
-        $user = $this->getUser();
-
-        return $this->render('session/register.html.twig', [
-            'sessionsRegistered' => $sessionRepository->findByParticipantRegistered($user->getId()),
-            'sessionsNotRegistered' => $sessionRepository->findByParticipantNotRegistered($user->getId()),
+        return $this->render('session/index.html.twig', [
+            'sessions' => $sessionRepository->findAll(),
         ]);
     }
 
@@ -81,5 +78,19 @@ class SessionController extends AbstractController
             'session' => $session,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Session $session): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($session);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('session_index');
     }
 }

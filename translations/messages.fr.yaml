@@ -1,0 +1,24 @@
+session:
+    fields:
+        id: "Id"
+        date: "Date"
+        participants: "Liste des participants"
+        movies: "Liste des films"
+    participant:
+        register: "S'inscrire"
+        unregister: "Se désinscrire"
+        registered: "Inscrit"
+        notregistered: "Pas encore inscrit"
+
+datas:
+    unknown:
+        list: "Aucun résultat"
+        date: "Inconnue"
+
+action:
+    edit: "Editer"
+    show:
+        list: "Tout voir"
+        details: "Voir le détail"
+    delete: "Supprimer"
+    new: "Ajouter"

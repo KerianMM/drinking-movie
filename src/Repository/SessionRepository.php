@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Session;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +20,47 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-    // /**
-    //  * @return Session[] Returns an array of Session objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $idParticipant
+     * @return Session[] Returns an array of Session objects
+     */
+    public function findByParticipantRegistered(int $idParticipant)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('session')
+            ->join('session.participants', 'participants')
+            ->andWhere('participants.id = :id')
+            ->setParameter('id', $idParticipant)
+            ->orderBy('session.date', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Session
+    /**
+     * @param int $idParticipant
+     * @return Session[] Returns an array of Session objects
+     */
+    public function findByParticipantNotRegistered(int $idParticipant)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+        $subquery = $this->createQueryBuilder('session2')
+            ->select('session2.id')
+            ->join('session2.participants', 'participants2')
+            ->andWhere('participants2.id = :id')
+            ->getQuery();
+
+        $queryBuilder = $this->createQueryBuilder('session');
+
+        return $queryBuilder
+            ->andWhere(
+                $queryBuilder->expr()->notIn(
+                    'session.id',
+                    $subquery->getDQL()
+                )
+            )
+            ->setParameter('id', $idParticipant)
+            ->orderBy('session.date', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

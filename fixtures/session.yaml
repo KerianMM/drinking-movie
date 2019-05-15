@@ -1,3 +1,5 @@
 App\Entity\Session:
     session_{1..10}:
         date: <dateTime()>
+        participants: '<numberBetween(1,10)>x @participant_*'
+        movies: '<numberBetween(1,4)>x @movie_*'

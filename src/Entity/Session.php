@@ -80,7 +80,7 @@ class Session
 
     public function __toString()
     {
-        return (string) $this->getDate()->format('d/m/YYYY');
+        return (string) $this->getDate()->format('d/m/Y H:i');
     }
 
     /**
