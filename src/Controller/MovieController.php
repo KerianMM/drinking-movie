@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\Entity\Session;
+use App\Repository\MatchRepository;
+use App\Service\MatchService;
 use App\Service\MovieService;
+use App\Service\RuleService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MovieController extends AbstractController
 {
     private $service;
+    private $matchService;
+    private $ruleService;
 
-    public function __construct(MovieService $service)
+    public function __construct(MovieService $service, MatchService $matchService, RuleService $ruleService)
     {
         $this->service = $service;
+        $this->ruleService = $ruleService;
+        $this->matchService = $matchService;
     }
 
     /**
@@ -23,6 +30,16 @@ class MovieController extends AbstractController
      */
     public function show(Session $session, int $idMovie): Response
     {
+        $rules = $this->ruleService->getNotMatchedRules(
+            $session->getId(),
+            $idMovie,
+            $this->getUser()->getId()
+        );
+
+        $this->matchService->createMatchForRules($rules, $session, $this->getUser());
+
+        $matchs = $this->matchService->getBySessionAndMovieAndUser($session->getId(), $idMovie, $this->getUser()->getId());
+
         return $this->render('movie/details.html.twig', [
             'movie' => $this->service->get($idMovie),
             'session' => $session
