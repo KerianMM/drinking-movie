@@ -39,3 +39,13 @@ action:
         details: "Voir le détail"
     delete: "Supprimer"
     new: "Ajouter"
+security:
+    register:
+        title: "Inscription"
+        action: "S'inscrire"
+    login:
+        title: "Connexion"
+        action: "Se connecter"
+    logout:
+        title: "Déconnexion"
+        action: "Se déconnecter"
