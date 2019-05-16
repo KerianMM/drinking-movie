@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Match;
 use App\Entity\Rule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +21,37 @@ class RuleRepository extends ServiceEntityRepository
         parent::__construct($registry, Rule::class);
     }
 
-    // /**
-    //  * @return Rule[] Returns an array of Rule objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $idSession
+     * @param int $idMovie
+     * @param int $idUser
+     * @return Rule[]
+     */
+    public function findNotMatched(int $idSession, int $idMovie, int $idUser): array
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('rule');
 
-    /*
-    public function findOneBySomeField($value): ?Rule
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $subQueryBuilder = $this->getEntityManager()->getRepository(Match::class)->createQueryBuilder('match')
+            ->select('rule2.id')
+            ->join('match.rule', 'rule2')
+            ->join('rule2.movie', 'movie2')
+            ->join('match.session', 'session2')
+            ->join('match.participant', 'participant2')
+            ->andWhere('participant2.id = :participant')
+            ->andWhere('movie2.id = :movie')
+            ->andWhere('session2.id = :session')
         ;
+
+        return $queryBuilder
+            ->join('rule.movie', 'movie')
+            ->andWhere('movie.id = :movie')
+            ->andWhere(
+                $queryBuilder->expr()->notIn('rule.id', $subQueryBuilder->getDQL())
+            )
+            ->setParameter(':movie', $idMovie)
+            ->setParameter(':session', $idSession)
+            ->setParameter(':participant', $idUser)
+            ->getQuery()
+            ->getResult();
     }
-    */
 }

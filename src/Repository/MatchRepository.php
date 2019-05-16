@@ -19,32 +19,23 @@ class MatchRepository extends ServiceEntityRepository
         parent::__construct($registry, Match::class);
     }
 
-    // /**
-    //  * @return Match[] Returns an array of Match objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findBySessionAndMovieAndUser(int $idSession, int $idMovie, int $idParticipant): array
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+        $queryBuilder = $this->createQueryBuilder('match');
+
+        return $queryBuilder
+            ->join('match.rule', 'rule')
+            ->join('rule.movie', 'movie')
+            ->join('match.session', 'session')
+            ->join('match.participant', 'participant')
+            ->andWhere('participant.id = :participant')
+            ->andWhere('movie.id = :movie')
+            ->andWhere('session.id = :session')
+            ->setParameter(':movie', $idMovie)
+            ->setParameter(':session', $idSession)
+            ->setParameter(':participant', $idParticipant)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Match
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
