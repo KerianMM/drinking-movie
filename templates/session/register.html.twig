@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-6">
             <h2>{{ 'session.participant.registered'|trans }}</h2>
-            <table class="table">
+            <table class="table" id="session-unregister">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -26,7 +26,7 @@
                         <td>{{ session.id }}</td>
                         <td>{{ session.date ? session : 'datas.unknown.date'|trans }}</td>
                         <td>
-                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_register"
+                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_unregister"
                                     title="{{ 'session.participant.unregister'|trans }}">
                                 {% include '_commun/icones/remove.html.twig' %}
                             </button>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-6">
             <h2>{{ 'session.participant.notregistered'|trans }}</h2>
-            <table class="table">
+            <table class="table" id="session-register">
                 <thead>
                 <tr>
                     <th>Id</th>
