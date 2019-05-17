@@ -19,25 +19,23 @@
         </tr>
         </thead>
         <tbody>
-        {% for rule in movie.rules %}
+        {% for match in matchs %}
             <tr>
-                <td>{{ rule.titre }}</td>
-                <td>{{ rule.description }}</td>
+                <td>{{ match.rule.titre }}</td>
+                <td>{{ match.rule.description }}</td>
                 <td class="w-25">
                     <button class="btn btn-success"
-                            data-id-rule="{{ rule.id }}"
-                            data-id-session="{{ session.id }}"
+                            data-id-rule="{{ match.id }}"
                             data-action="match_add">
                         {% include '_commun/icones/add.html.twig' %}
                     </button>
                     <button class="btn btn-danger"
-                            data-id-rule="{{ rule.id }}"
-                            data-id-session="{{ session.id }}"
+                            data-id-rule="{{ match.id }}"
                             data-action="match_remove">
                         {% include '_commun/icones/remove.html.twig' %}
                     </button>
                 </td>
-                <td>0</td>
+                <td><span class="match-count">{{ match.count }}</span></td>
             </tr>
         {% else %}
             <tr>

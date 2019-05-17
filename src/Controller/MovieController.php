@@ -41,8 +41,9 @@ class MovieController extends AbstractController
         $matchs = $this->matchService->getBySessionAndMovieAndUser($session->getId(), $idMovie, $this->getUser()->getId());
 
         return $this->render('movie/details.html.twig', [
-            'movie' => $this->service->get($idMovie),
-            'session' => $session
+            'movie' => $matchs[0]->getRule()->getMovie(),
+            'session' => $session,
+            'matchs' => $matchs
         ]);
     }
 }
