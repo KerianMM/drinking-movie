@@ -8,7 +8,7 @@ security:
             entity:
                 class: App\Entity\Participant
                 property: email
-        app_user_admin:
+        app_admin_provider:
             memory:
                 users:
                     admin: { password: 'admin', roles: ['ROLE_ADMIN'] }
@@ -20,7 +20,7 @@ security:
             pattern: ^/admin
             http_basic:
                 realm: Zone admin
-            provider: app_user_admin
+            provider: app_admin_provider
         main:
             anonymous: true
             guard:

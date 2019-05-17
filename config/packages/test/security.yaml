@@ -1,6 +1,6 @@
 security:
     providers:
-        app_user_admin:
+        app_admin_provider:
             memory:
                 users:
                     admin: { password: 'admin', roles: ['ROLE_ADMIN'] }
