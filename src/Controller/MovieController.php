@@ -30,6 +30,10 @@ class MovieController extends AbstractController
      */
     public function show(Session $session, int $idMovie): Response
     {
+        if($session->getIsFinished()){
+            return $this->redirectToRoute('session_finish');
+        }
+
         $rules = $this->ruleService->getNotMatchedRules(
             $session->getId(),
             $idMovie,

@@ -52,6 +52,10 @@ class SessionController extends AbstractController
      */
     public function show(Session $session): Response
     {
+        if($session->getIsFinished()){
+            return $this->redirectToRoute('session_finish');
+        }
+
         return $this->render('session/details.html.twig', [
             'session' => $session,
         ]);
