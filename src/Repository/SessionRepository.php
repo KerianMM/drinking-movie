@@ -28,10 +28,12 @@ class SessionRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('session');
         return $queryBuilder
             ->join('session.participants', 'participants')
-            ->andWhere('participants.id = :id')
             ->andWhere('session.date >= :date')
+            ->orWhere('session.isFinished = :finished')
+            ->andWhere('participants.id = :id')
             ->setParameter('id', $idParticipant)
             ->setParameter('date', new \DateTime())
+            ->setParameter('finished', false)
             ->orderBy('session.date', 'ASC')
             ->getQuery()
             ->getResult()
