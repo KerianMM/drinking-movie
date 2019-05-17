@@ -78,7 +78,7 @@ module.exports = class Register {
 
                 let iconeElement = jQuery(element).children('i')[0];
                 iconeElement.classList.remove('fa-plus');
-                iconeElement.classList.add('fa-time');
+                iconeElement.classList.add('fa-times');
 
                 jQuery(element).fadeIn();
             };
@@ -91,7 +91,7 @@ module.exports = class Register {
 
                 let iconeElement = jQuery(element).children('i')[0];
                 iconeElement.classList.remove('fa-plus');
-                iconeElement.classList.add('fa-time');
+                iconeElement.classList.add('fa-times');
 
                 jQuery(element).fadeIn();
             };
