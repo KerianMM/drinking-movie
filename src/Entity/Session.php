@@ -45,12 +45,18 @@ class Session
      */
     private $movies;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFinished;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->date = new \DateTime();
         $this->participants = new ArrayCollection();
         $this->movies = new ArrayCollection();
+        $this->isFinished = false;
     }
 
     public function getId(): ?int
@@ -136,6 +142,18 @@ class Session
         if ($this->movies->contains($movie)) {
             $this->movies->removeElement($movie);
         }
+
+        return $this;
+    }
+
+    public function getIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }
