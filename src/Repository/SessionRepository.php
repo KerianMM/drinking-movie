@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Session;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -26,10 +25,13 @@ class SessionRepository extends ServiceEntityRepository
      */
     public function findByParticipantRegistered(int $idParticipant)
     {
-        return $this->createQueryBuilder('session')
+        $queryBuilder = $this->createQueryBuilder('session');
+        return $queryBuilder
             ->join('session.participants', 'participants')
             ->andWhere('participants.id = :id')
+            ->andWhere('session.date >= :date')
             ->setParameter('id', $idParticipant)
+            ->setParameter('date', new \DateTime())
             ->orderBy('session.date', 'ASC')
             ->getQuery()
             ->getResult()
@@ -57,6 +59,8 @@ class SessionRepository extends ServiceEntityRepository
                     $subquery->getDQL()
                 )
             )
+            ->andWhere('session.date >= :date')
+            ->setParameter('date', new \DateTime())
             ->setParameter('id', $idParticipant)
             ->orderBy('session.date', 'ASC')
             ->getQuery()
