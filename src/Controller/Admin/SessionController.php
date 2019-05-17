@@ -39,7 +39,7 @@ class SessionController extends AbstractController
             $entityManager->persist($session);
             $entityManager->flush();
 
-            return $this->redirectToRoute('session_index');
+            return $this->redirectToRoute('admin_session_index');
         }
 
         return $this->render('session/new.html.twig', [
@@ -69,7 +69,7 @@ class SessionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('session_index', [
+            return $this->redirectToRoute('admin_session_index', [
                 'id' => $session->getId(),
             ]);
         }
@@ -91,6 +91,6 @@ class SessionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('session_index');
+        return $this->redirectToRoute('admin_session_index');
     }
 }

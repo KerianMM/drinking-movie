@@ -42,7 +42,7 @@ class ParticipantController extends AbstractController
             $entityManager->persist($participant);
             $entityManager->flush();
 
-            return $this->redirectToRoute('participant_index');
+            return $this->redirectToRoute('admin_participant_index');
         }
 
         return $this->render('participant/new.html.twig', [
@@ -72,7 +72,7 @@ class ParticipantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('participant_index', [
+            return $this->redirectToRoute('admin_participant_index', [
                 'id' => $participant->getId(),
             ]);
         }
@@ -94,6 +94,6 @@ class ParticipantController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('participant_index');
+        return $this->redirectToRoute('admin_participant_index');
     }
 }

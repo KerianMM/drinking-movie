@@ -39,7 +39,7 @@ class RuleController extends AbstractController
             $entityManager->persist($rule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('rule_index');
+            return $this->redirectToRoute('admin_rule_index');
         }
 
         return $this->render('rule/new.html.twig', [
@@ -69,7 +69,7 @@ class RuleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('rule_index', [
+            return $this->redirectToRoute('admin_rule_index', [
                 'id' => $rule->getId(),
             ]);
         }
@@ -91,6 +91,6 @@ class RuleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('rule_index');
+        return $this->redirectToRoute('admin_rule_index');
     }
 }

@@ -49,7 +49,7 @@ class MovieController extends AbstractController
             $entityManager->persist($movie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('movie_index');
+            return $this->redirectToRoute('admin_movie_index');
         }
 
         return $this->render('movie/new.html.twig', [
@@ -79,7 +79,7 @@ class MovieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('movie_index', [
+            return $this->redirectToRoute('admin_movie_index', [
                 'id' => $movie->getId(),
             ]);
         }
@@ -101,6 +101,6 @@ class MovieController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('movie_index');
+        return $this->redirectToRoute('admin_movie_index');
     }
 }
