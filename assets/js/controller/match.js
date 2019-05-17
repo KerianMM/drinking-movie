@@ -18,9 +18,11 @@ module.exports = class Match {
                 let idMatch = element.getAttribute('data-id-rule');
                 this.getMatchCount(idMatch, function(count){
                     (add) ?count++ : count--;
-                    this.updateMatchCount(idMatch, count, function(){
-                        this.updateCountSpanElement(count, element);
-                    }.bind(this))
+                    if(count >= 0){
+                        this.updateMatchCount(idMatch, count, function(){
+                            this.updateCountSpanElement(count, element);
+                        }.bind(this))
+                    }
                 }.bind(this))
             }.bind(this));
         }
