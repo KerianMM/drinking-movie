@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'session.title'|trans }}{% endblock %}
+
+{% block header %}
+    {% include '_commun/headers/user.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'session.finished.title'|trans }}</h1>
+
+    <p>{{ 'session.finished.content'|trans }}</p>
+
+    <a class="btn btn-primary" href="{{ path('session_index') }}">{{ 'session.list.title'|trans }}</a>
+{% endblock %}

@@ -9,6 +9,8 @@
 {% block body %}
     <h1>{{ 'session.title'|trans }} {{ session.date.format("d/m/Y H:i") }} | {{ 'movie.title'|trans }} {{ movie.name }}</h1>
 
+    <a class="btn btn-primary" href="{{ path('session_finish', {id: session.id}) }}">{{ 'session.finished.action'|trans }}</a>
+
     <table class="table">
         <thead>
         <tr>

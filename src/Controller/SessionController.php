@@ -34,6 +34,20 @@ class SessionController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/finish", name="finish", methods={"GET"})
+     */
+    public function finish(Session $session): Response
+    {
+        if(!$session->getIsFinished()){
+            $this->service->finish($session);
+        }
+
+        return $this->render('session/finished.html.twig', [
+            'session' => $session,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="details", methods={"GET"})
      */
     public function show(Session $session): Response

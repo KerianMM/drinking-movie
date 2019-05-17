@@ -1,6 +1,10 @@
 session:
     list.title: "Sessions"
     title: "Session"
+    finished:
+        title: "Session terminée"
+        content: "Cette session est terminée ! Nous vous invitons à vous inscrire à nouveau pour pouvoir continuer à vous imbiber."
+        action: "Terminer la session et arrêter le carnage."
     fields:
         id: "Id"
         date: "Date"

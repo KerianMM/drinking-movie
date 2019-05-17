@@ -10,15 +10,14 @@ use App\Entity\Session;
 use App\Repository\MatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MatchService
+class MatchService extends AbstractService
 {
     private $repository;
-    private $entityManager;
 
     public function __construct(MatchRepository $repository, EntityManagerInterface $entityManager)
     {
+        parent::__construct($entityManager);
         $this->repository = $repository;
-        $this->entityManager = $entityManager;
     }
 
     /**
