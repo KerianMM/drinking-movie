@@ -9,7 +9,10 @@
 {% block body %}
     <h1>{{ 'session.title'|trans }} {{ session.date.format("d/m/Y H:i") }} | {{ 'movie.title'|trans }} {{ movie.name }}</h1>
 
-    <a class="btn btn-primary" href="{{ path('session_finish', {id: session.id}) }}">{{ 'session.finished.action'|trans }}</a>
+
+    {% if not playable %}
+        <a class="btn btn-primary" href="{{ path('session_finish', {id: session.id}) }}">{{ 'session.finished.action'|trans }}</a>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -26,16 +29,20 @@
                 <td>{{ match.rule.titre }}</td>
                 <td>{{ match.rule.description }}</td>
                 <td class="w-25">
-                    <button class="btn btn-success"
-                            data-id-rule="{{ match.id }}"
-                            data-action="match_add">
-                        {% include '_commun/icones/add.html.twig' %}
-                    </button>
-                    <button class="btn btn-danger"
-                            data-id-rule="{{ match.id }}"
-                            data-action="match_remove">
-                        {% include '_commun/icones/remove.html.twig' %}
-                    </button>
+                    {% if playable %}
+                        <button class="btn btn-success"
+                                data-id-rule="{{ match.id }}"
+                                data-action="match_add">
+                            {% include '_commun/icones/add.html.twig' %}
+                        </button>
+                        <button class="btn btn-danger"
+                                data-id-rule="{{ match.id }}"
+                                data-action="match_remove">
+                            {% include '_commun/icones/remove.html.twig' %}
+                        </button>
+                    {% else %}
+                        {{ 'match.not.playable'|trans }}
+                    {% endif %}
                 </td>
                 <td><span class="match-count">{{ match.count }}</span></td>
             </tr>

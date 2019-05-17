@@ -29,6 +29,10 @@ rule:
         title: "Titre"
         description: "Description"
         count: "Nombre de verres"
+match:
+    not:
+        playable: "Vous ne pouvez pas encore jouer."
+
 participant:
     list.title: "Utilisateurs"
     title: "Utilisateur"

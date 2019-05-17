@@ -47,7 +47,8 @@ class MovieController extends AbstractController
         return $this->render('movie/details.html.twig', [
             'movie' => $matchs[0]->getRule()->getMovie(),
             'session' => $session,
-            'matchs' => $matchs
+            'matchs' => $matchs,
+            'playable' => $session->getDate() < new \DateTime()
         ]);
     }
 }
