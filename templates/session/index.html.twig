@@ -18,8 +18,8 @@
         {% for session in sessions %}
             <tr>
                 <td>{{ session.id }}</td>
-                <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ session.date ? session.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ session.createdAt ? 'Le '~ session.createdAt|date('d/m/Y') ~' à '~ session.createdAt|date('H:i') : '' }}</td>
+                <td>{{ session.date ? 'Le '~ session.date|date('d/m/Y') ~' à '~ session.date|date('H:i') : '' }}</td>
                 <td>
                     <a href="{{ path('admin_session_show', {'id': session.id}) }}">show</a>
                     <a href="{{ path('admin_session_edit', {'id': session.id}) }}">edit</a>

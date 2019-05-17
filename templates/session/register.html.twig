@@ -10,9 +10,9 @@
     <h1>Session index</h1>
 
     <div class="row">
-        <div class="col-6">
-            <h2>{{ 'session.participant.registered'|trans }}</h2>
-            <table class="table" id="session-unregister">
+        <div class="col-md-6">
+            <h2>{{ 'session.participant.notregistered'|trans }}</h2>
+            <table class="table" id="session-register">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -21,14 +21,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for session in sessionsRegistered %}
+                {% for session in sessionsNotRegistered %}
                     <tr>
                         <td>{{ session.id }}</td>
-                        <td>{{ session.date ? session : 'datas.unknown.date'|trans }}</td>
+                        <td>{{ session.date ? 'Le '~ session.date|date('d/m/Y') ~' à '~ session.date|date('H:i') : 'datas.unknown.date'|trans }}</td>
                         <td>
-                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_unregister"
-                                    title="{{ 'session.participant.unregister'|trans }}">
-                                {% include '_commun/icones/remove.html.twig' %}
+                            <button class="btn btn-success" data-id="{{ session.id }}" data-action="session_register"
+                                    title="{{ 'session.participant.register'|trans }}">
+                                {% include '_commun/icones/add.html.twig' %}
                             </button>
                             <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">
                                 {% include '_commun/icones/search.html.twig' %}
@@ -43,9 +43,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-6">
-            <h2>{{ 'session.participant.notregistered'|trans }}</h2>
-            <table class="table" id="session-register">
+        <div class="col-md-6">
+            <h2>{{ 'session.participant.registered'|trans }}</h2>
+            <table class="table" id="session-unregister">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -54,14 +54,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for session in sessionsNotRegistered %}
+                {% for session in sessionsRegistered %}
                     <tr>
                         <td>{{ session.id }}</td>
-                        <td>{{ session.date ? session : 'datas.unknown.date'|trans }}</td>
+                        <td>{{ session.date ? 'Le '~ session.date|date('d/m/Y') ~' à '~ session.date|date('H:i') : 'datas.unknown.date'|trans }}</td>
                         <td>
-                            <button class="btn btn-success" data-id="{{ session.id }}" data-action="session_register"
-                                    title="{{ 'session.participant.register'|trans }}">
-                                {% include '_commun/icones/add.html.twig' %}
+                            <button class="btn btn-danger" data-id="{{ session.id }}" data-action="session_unregister"
+                                    title="{{ 'session.participant.unregister'|trans }}">
+                                {% include '_commun/icones/remove.html.twig' %}
                             </button>
                             <a class="btn btn-primary" href="{{ path('session_details', {'id': session.id}) }}">
                                 {% include '_commun/icones/search.html.twig' %}
