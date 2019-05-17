@@ -2,15 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\MatchRepository")
  * @ORM\Table(name="`match`")
  */
 class Match
 {
     /**
+     * @Groups({"read"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,23 +26,31 @@ class Match
     private $id;
 
     /**
+     * @Groups({"read", "write"})
+     *
      * @ORM\Column(type="integer")
      */
     private $count;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Session")
      * @ORM\JoinColumn(nullable=false)
      */
     private $session;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Participant")
      * @ORM\JoinColumn(nullable=false)
      */
     private $participant;
 
     /**
+     * @Groups({"read"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Rule")
      * @ORM\JoinColumn(nullable=false)
      */

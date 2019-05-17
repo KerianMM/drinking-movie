@@ -11,7 +11,9 @@ jQuery = require('jquery');
 
 const ajaxService = require('./service/ajax.js');
 const registerController = require('./controller/register.js');
+const matchController = require('./controller/match.js');
 
 new registerController(ajaxService);
+new matchController(ajaxService);
 
 console.log('build');

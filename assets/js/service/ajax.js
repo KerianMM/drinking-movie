@@ -37,6 +37,14 @@ class MyAjax {
         };
         this.put(`/participants/${id}`, body, success, fail, await)
     }
+
+    getMatch(id, success, fail, await){
+        this.ajax(`/matches/${id}`, success, fail, await);
+    }
+
+    updateMatch(id, match, success, fail, await){
+        this.put(`/matches/${id}`, match, success, fail, await)
+    }
 }
 
 module.exports = new MyAjax();
