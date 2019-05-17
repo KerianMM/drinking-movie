@@ -4,6 +4,7 @@ namespace App\Tests;
 
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityAdminTest extends WebTestCase {
     /**
@@ -15,7 +16,7 @@ class SecurityAdminTest extends WebTestCase {
             'PHP_AUTH_PW'   => 'admin',
         ]);
         $client->request('GET', $url);
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -27,7 +28,7 @@ class SecurityAdminTest extends WebTestCase {
             'PHP_AUTH_PW'   => 'fjksdhflksdhfql',
         ]);
         $client->request('GET', $url);
-        $this->assertFalse($client->getResponse()->isSuccessful());
+        $this->assertNotSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
     public function urlAdminProvider() {
